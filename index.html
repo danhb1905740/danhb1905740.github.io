@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Trang Chủ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+    <link rel="stylesheet" href="style.css">
+
+
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_dropdown_button">
+    <link rel="icon" type="image/x-icon"
+        href="https://png.pngtree.com/png-vector/20190711/ourlarge/pngtree-house-icon-real-estate-graphic-design-template-vector-png-image_1542067.jpg">
+
+    <style>
+        body {
+
+            margin: 200;
+            font-family: Times new roman, sans-serif;
+            font-size: 150%;
+            background-color: #F0FFFF;
+        }
+
+        /* Style the top navigation bar */
+        .navbar {
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 20px;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Current/active navbar link */
+        .active {
+            background-color: #04AA6D;
+        }
+
+        /* Style the content */
+        .content {
+            background-color: #ddd;
+            padding: 10px;
+        }
+
+        /* Style the footer */
+        .footer {
+            background-color: white;
+            padding: 10px;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 20px;
+            border: none;
+            outline: none;
+            color: black;
+            padding: 14px 16px;
+            background-color: white;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover,
+        .dropdown:hover .dropbtn {
+            background-color: green;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: black;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        .note {
+            background: #f0fdff url(http://2.bp.blogspot.com/-qnRqTRJBDBc/T7IbYKqwV_I/AAAAAAAADhs/1jXAAlyi060/s1600/notice-bg-namkna-blogspot-com.png) repeat-x 0 0;
+            color: #796100;
+            width: 83%;
+            font-weight: normal;
+            padding: 13px 15px 0;
+            margin-bottom: 2.5em;
+            border: 1px solid #306EFF;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, .4);
+            -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .4);
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, .4);
+            position: relative;
+            left: 34px
+        }
+
+        .note p {
+            margin-bottom: 1.5em
+        }
+
+        .note p:last-child {
+            margin-bottom: 0
+        }
+
+        .note ul {
+            margin-left: 8px;
+            margin-bottom: 1.5em
+        }
+
+        .note ul:last-child {
+            margin-bottom: 0
+        }
+
+        .note li {
+            background: url(http://3.bp.blogspot.com/-6yiWVYRwaMo/UUh94gK2lmI/AAAAAAAAJbw/P62nzrOjRO8/s1600/notice-tabs-namkna-blogspot-002.png) no-repeat 0 -95px;
+            list-style-type: none;
+            padding-left: 18px;
+            margin-bottom: .75em
+        }
+
+        .note h5 {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0 0 .65em
+        }
+
+        .note span {
+            background: url(http://3.bp.blogspot.com/-6yiWVYRwaMo/UUh94gK2lmI/AAAAAAAAJbw/P62nzrOjRO8/s1600/notice-tabs-namkna-blogspot-002.png) no-repeat 100% 0;
+            width: 33px;
+            height: 40px;
+            position: absolute;
+            left: -34px;
+            top: 9px
+        }
+
+
+
+
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700);
+
+        .blog {
+            position: relative;
+            width: 30em;
+            height: 38em;
+            background-image: url("img/home2.jpg");
+            /* background: url(https://images.pexels.com/photos/2310642/pexels-photo-2310642.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) no-repeat; */
+            background-size: 30em 38em;
+            box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+            margin: auto;
+            -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+            overflow: hidden;
+        }
+
+        .blog * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog:hover .color-overlay {
+            background: rgba(74, 100, 114, 0.8);
+        }
+
+        .blog:hover .info {
+            bottom: -3em;
+            opacity: 1;
+        }
+
+        .blog,
+        .color-overlay {
+            border-radius: 0.7em;
+        }
+
+        .color-overlay {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            transition: 0.7s background;
+            background: rgba(74, 100, 114, 0.3);
+            z-index: 1;
+        }
+
+        .title-box {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        .title-box hr {
+            margin-top: -0.4em;
+            margin-bottom: 1em;
+            width: 5em;
+            height: 0.25em;
+            box-sizing: content-box;
+            border: none;
+            background: #D0BC57;
+        }
+
+        h3 {
+            display: inline-block;
+            font-weight: 500;
+            letter-spacing: 2px;
+            font-size: 1.4em;
+
+            text-align: center;
+        }
+
+        .intro {
+            width: 170px;
+            margin: 0 auto;
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            font-size: 13px;
+            font-style: italic;
+            line-height: 18px;
+        }
+
+
+        .info {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2em;
+            color: #ddd;
+            line-height: 1.1em;
+            padding: 0 2em;
+
+            position: relative;
+            bottom: -4em;
+            opacity: 0;
+            background: transparent;
+            transition: opacity 0.3s, bottom 0.3s;
+            text-align: center;
+        }
+
+        .footer {
+            display: inline-block;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 10em;
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+            border-radius: 0 0 0.7em 0.7em;
+        }
+
+        .footer>.icon-holder {
+            position: absolute;
+            bottom: 0;
+            height: 3em;
+            width: 100%;
+            display: inline-block;
+            font-size: 1.2em;
+            padding: 0 2em;
+
+        }
+
+        .icon-holder i {
+
+            color: #D0BC57;
+        }
+
+        .icon-holder span,
+        h3 {
+            color: #aCcff0;
+        }
+
+        .space {
+            display: inline-block;
+            width: 0.6em;
+            height: 1em;
+        }
+        body{
+            background-image: url('img/br.jpg');
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="./index.html"><i class="fa fa-fw fa-home"></i>Trang chủ</a>
+        <a href="./thanhvien.html"><i class="fa fa-fw fa-user"></i>Thành viên nhóm</a>
+        <a href="./nhaphang.html"><i class="fa fa-fw fa-car"></i>Thông tin nhập hàng</a>
+        <a href="./banhang.html"><i class="fa fa-fw fa-truck"></i>Thông tin xuất hàng</a>
+        <a href="./soluongthongke.html"><i class="fa fa-fw fa-file"></i>Số lượng thống kê</a>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fa fa-fw fa-bars"></i>Xem thêm
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a class="active" href="./lienhe.html" style="color: white;"><i class="fa fa-fw fa-envelope"></i>Liên
+                    hệ</a>
+                <a href="https://www.w3schools.com/" target="_blank" style="color: white;"><i
+                        class="fa fa-fw fa-search"></i>Nguồn tham khảo</a>
+                <a href="https://cet.ctu.edu.vn/don-vi/bo-mon-quan-ly-cong-nghiep.html" target="_blank"
+                    style="color: white;"><i class="fa fa-fw fa-thumbs-up"></i>Quản lý Công Nghiệp</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Chức năng TC -->
+    <div id="thanhtrangchu" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top"
+        style="margin-top:46px">
+        <a href="#thanhvien" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Thành Viên Nhóm</a>
+        <a href="#nhaphang" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Nhập Hàng</a>
+        <a href="#xuathang" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Xuất Hàng</a>
+        <a href="#solieuthongke" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Số Liệu Thống
+            Kê</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Xem Thêm</a>
+    </div>
+    <!--Hết-->
+    <div class="w3-container" style="background-color: #630c09; margin-bottom: 10px;" ;>
+        <h1 align="center">
+            <font face="times new roman" ; color="white" ;><b>HỆ THỐNG QUẢN LÝ BÁN HÀNG <br> SẢN PHẨM ÁO KHOÁC</b></font>
+        </h1>
+        <h2 align="center">
+            <font face="times new roman" ; color="white" ;>
+                Quản lý nhanh chóng và hiệu quả</font>
+        </h2>
+    </div>
+    <!-- Page content -->
+    <div class="w3-content" style="max-width:2000px;">
+        
+        <div class="mySlides w3-display-container w3-center">
+            <img src="img/home3.jpg"
+            style="width:2000px;  height:700px ;">
+            <div class="w3-display-left w3-container w3-text-white w3-padding-32 w3-hide-small">
+                <h2>
+                    <font face="times new roman" ; color="white" ;><b>Trong kỉ nguyên hiện đại, tất cả các lĩnh vực đều được công nghệ hóa, số hóa, kể cả việc lưu trữ sổ sách kinh doanh. Bởi việc bán hàng ngày nay, không chỉ đơn thuần là giao dịch trực tiếp giữa chủ cửa hàng và khách hàng, mà còn trên nhiều phương diện khác nhau. Vì vậy, nó tạo ra những khó khăn nhất định trong việc kiểm soát, nắm bắt thông tin hàng hóa. Khi này, một trang Web quản lý các hoạt động mua bán, có tích hợp các chức năng, thông tin cần thiết sẽ là một trợ thủ đắc lực cho bất kì cửa hàng nào. Nắm bắt được nhu cầu đó, chúng tôi cho ra mắt một trang Web quản lý bán hàng thuộc ngách sản phẩm áo khoác gồm Hoodie, Sweater, Jacket. Trang Web sẽ là một "người quản lý" điện tử, đáp ứng đầy đủ tiêu chí: "NHANH CHÓNG - ĐƠN GIẢN - CHÍNH XÁC".</b>
+                </h2>
+                </font>
+                <h2>
+            </div>
+        </div>
+        
+        <!--Hết-->
+
+
+        <!--Bảng giới thiệu-->
+        <div class="w3-content w3-padding-32 w3-container">
+
+            <h2 align="center">
+                <font face="times new roman" ; color="black" ;><i class="fa fa-fw fa-caret-down"></i>
+                    Tổng quan về các loại sản phẩm
+            </h2>
+            </font>
+
+            <div class="col-wrap">
+
+
+
+                <div class="col">
+                    <img src="img/a3.jpg"
+                        style="width:300px" "height:600px">
+                    <h2>
+                        <font face="times new roman" >HOODIE</font>
+                    </h2>
+                    
+
+                </div>
+
+                <div class="col">
+                    <img src="img/sweater1.jpg"
+                        style="width:300px" "height:600px">
+                    <h2>
+                        <font face="times new roman">SWEATER</font>
+                    </h2>
+                </div>
+
+                <div class="col">
+                    <img src="img/jacket2.jpg"
+                        style="width:300px" "height:600px">
+                    <h2>
+                        <font face="times new roman">JACKET</font>
+                    </h2>
+                </div>
+            </div>
+            <style type="text/css">
+                .col-wrap {
+                    display: table;
+                    width: 100%;
+                }
+
+                .col {
+                    display: table-cell;
+                    padding: 1rem
+                }
+
+                .col:nth-child(even) {
+                    background-color: orange;
+                    text-align: center;
+                }
+
+                .col:nth-child(odd) {
+                    background-color: yellow;
+                    text-align: center;
+                }
+            </style>
+
+        </div>
+        <!--Hết-->
+
+        <!--Giới thiệu tổng quan-->
+        <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="trangchu">
+            <p class="w3-justify"> Trang Web sẽ quản lý bao quát tất cả các thông tin về các sản phẩm áo khoác, bao gồm phân loại áo, mẫu mã, màu sắc, kích thước,...Mỗi thông tin sẽ chính xác và đầy đủ đến từng những thông số phức tạp nhất, ví dụ: Áo Hoodie croptop, màu đen, vải cotton. Bên cạnh đó, nhằm kiểm soát số lượng hàng hóa được nhập vào và bán ra mỗi ngày, trang Web còn được tích hợp những thông tin xuất nhập hàng bằng biểu đồ dựa trên những dữ liệu về số lượng và ngày tháng nhập hàng, bán hàng. Từ đó, có thể tối ưu hóa bước quản lý bán hàng, hỗ trợ cửa hàng có thể nhanh chóng nắm bắt chính xác nhu cầu tiêu thụ của khách hàng thông qua những số liệu kinh doanh. </p>
+        </div>
+        <!--Hết-->
+
+        <!--Giới Thiệu Nội Dung Trang Web-->
+        <div class="w3-content w3-padding-64 w3-container">
+            <div class="blog">
+
+                <div class="title-box">
+                    <h3>
+                        <font align="center" face="times new roman" color="white" ;><b>Tổng Thể Trang Web 🐳</b>
+                    </h3>
+                    </font>
+                    <hr />
+                    <div class="intro">
+                        IOT Nhóm 15
+                    </div>
+                </div>
+                <div class="info">
+                    <span>
+                        <br>Trang chủ </br>
+                        <br>Trang Thành Viên Nhóm </br>
+                        <br>Trang Thông Tin Nhập Hàng </br>
+                        <br>Trang Thông Tin Xuất Hàng </br>
+                        <br>Trang Số Liệu Thống Kê</br>
+                        <br>Xem Thêm (Liên Hệ; Nguồn Tham Khảo; Ngành Quản Lý Công Nghiệp).</br>
+                    </span>
+                </div>
+                <div class="footer">
+                    <div class="icon-holder">
+                        <span>
+                            <i class="fa fa-calendar"></i>
+                            <span>December 2022</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="color-overlay"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="w3-center ">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+
+            <p clas="w3-medium"> Đồ Án Nhóm 15
+                <p />
+
+        </footer>
+        <!--Hết-->
+
+        <script>
+            // Automatic Slideshow - change image every 4 seconds
+            var myIndex = 0;
+            carousel();
+
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) { myIndex = 1 }
+                x[myIndex - 1].style.display = "block";
+                setTimeout(carousel, 4000);
+            }
+
+            // Used to toggle the menu on small screens when clicking on the menu button
+            function myFunction() {
+                var x = document.getElementById("navDemo");
+                if (x.className.indexOf("w3-show") == -1) {
+                    x.className += " w3-show";
+                } else {
+                    x.className = x.className.replace(" w3-show", "");
+                }
+            }
+
+
+
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Số liệu thống kê</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="icon" type="image/x-icon" href="https://img.lovepik.com/element/40020/4069.png_860.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        body {
+            background-color: #F0FFFF;
+            font-family: Times new roman, sans-serif;
+            font-size: 150%;
+        }
+
+
+        /* Style the top navigation bar */
+        .navbar {
+            overflow: hidden;
+            background-color: white;
+            font-family: Times new roman, sans-serif;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 20px;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Current/active navbar link */
+        .active {
+            background-color: #04AA6D;
+        }
+
+        /* Style the content */
+        .content {
+            background-color: #F0FFFF;
+            padding: 20px;
+            font-family: Times new roman;
+        }
+
+        /* Style the footer */
+        .footer {
+            background-color: white;
+            padding: 10px;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 20px;
+            border: none;
+            outline: none;
+            color: black;
+            padding: 14px 16px;
+            background-color: white;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover,
+        .dropdown:hover .dropbtn {
+            background-color: green;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: black;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        tr {
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-td {
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chartWrapper {
+            gap: 10vw;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="./index.html"><i class="fa fa-fw fa-home"></i>Trang chủ</a>
+        <a href="./thanhvien.html"><i class="fa fa-fw fa-user"></i>Thành viên nhóm</a>
+        <a href="./nhaphang.html"><i class="fa fa-fw fa-car"></i>Thông tin nhập hàng</a>
+        <a href="./banhang.html"><i class="fa fa-fw fa-truck"></i>Thông tin xuất hàng</a>
+        <a href="./soluongthongke.html"><i class="fa fa-fw fa-file"></i>Số lượng thống kê</a>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fa fa-fw fa-bars"></i>Xem thêm
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a class="active" href="./lienhe.html" style="color: white;"><i class="fa fa-fw fa-envelope"></i>Liên
+                    hệ</a>
+                <a href="https://www.w3schools.com/" target="_blank" style="color: white;"><i class="fa fa-fw fa-search"></i>Nguồn tham khảo</a>
+                <a href="https://cet.ctu.edu.vn/don-vi/bo-mon-quan-ly-cong-nghiep.html" target="_blank" style="color: white;"><i class="fa fa-fw fa-thumbs-up"></i>Quản lý Công Nghiệp</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container" style="background-color:#630c09">
+        <h1 style="text-align: center; font-family: TimesNewRoman; color: white ">
+            <b>BIỂU ĐỒ THỐNG KÊ SỐ LIỆU</b>
+            <br>
+        </h1>
+        <br>
+    </div>
+
+
+    <script>
+        function thongKeHoodie() {
+
+            var requestNhap = new XMLHttpRequest()
+            var urlNhap = "https://api.thingspeak.com/channels/1977080/fields/1.json?api_key=75JQCE82LDZPGTO4"
+            requestNhap.open('GET', urlNhap, true)
+
+            requestNhap.onload = function() {
+                if (requestNhap.status == 200) {
+                    var data = JSON.parse(requestNhap.responseText);
+
+                    dataHoodie = new Array();
+                    for (i = 0; i < data.feeds.length; i++) {
+                        if (data.feeds[i].field1) {
+                            dataHoodie.push(data.feeds[i].field1)
+                        }
+                    }
+
+                    var yHoodie = new Array();
+                    var xHoodie = new Array();
+
+                    for (var i = 0; i < dataHoodie.length; i++) {
+                        var dataParse = JSON.parse(dataHoodie[i])
+                        yHoodie.push(parseInt(dataParse.val))
+                        xHoodie.push(dataParse.day);
+                    }
+
+                    new Chart("chartHoodieNhap", {
+                        type: "bar",
+                        data: {
+                            labels: xHoodie,
+                            datasets: [{
+                                fill: false,
+                                backgroundColor: "#000080",
+                                label: "Biểu đồ số lượng áo HOODIE đã nhập",
+                                data: yHoodie
+                            }, ]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    display: true,
+                                    ticks: {
+                                        beginAtZero: true,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+                } else {}
+            }
+            requestNhap.send()
+
+            var requestXuat = new XMLHttpRequest();
+            var urlXuat = "https://api.thingspeak.com/channels/1977080/fields/4.json?api_key=75JQCE82LDZPGTO4"
+            requestXuat.open('GET', urlXuat, true);
+
+            requestXuat.onload = function() {
+                if (requestXuat.status == 200) {
+                    var data = JSON.parse(requestXuat.responseText);
+
+                    dataHoodie = new Array();
+                    for (i = 0; i < data.feeds.length; i++) {
+                        if (data.feeds[i].field4) {
+                            dataHoodie.push(data.feeds[i].field4)
+                        }
+                    }
+
+                    var yHoodie = new Array();
+                    var xHoodie = new Array();
+
+                    for (var i = 0; i < dataHoodie.length; i++) {
+                        var dataParse = JSON.parse(dataHoodie[i])
+                        yHoodie.push(parseInt(dataParse.val))
+                        xHoodie.push(dataParse.day);
+                    }
+
+                    new Chart("chartHoodieXuat", {
+                        type: "bar",
+                        data: {
+                            labels: xHoodie,
+                            datasets: [{
+                                fill: false,
+                                backgroundColor: "#000080",
+                                label: "Biểu đồ số lượng áo HOODIE đã xuất",
+                                data: yHoodie
+                            }, ]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    display: true,
+                                    ticks: {
+                                        beginAtZero: true,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+                } else {}
+            }
+            requestXuat.send()
+        }
+
+        function thongKeSweater() {
+            var requestNhap = new XMLHttpRequest()
+            var urlNhap = "https://api.thingspeak.com/channels/1977080/fields/2.json?api_key=75JQCE82LDZPGTO4"
+
+            requestNhap.open('GET', urlNhap, true)
+            requestNhap.onload = function() {
+                if (requestNhap.status == 200) {
+                    var data = JSON.parse(requestNhap.responseText);
+
+                    dataSweater = new Array();
+                    for (i = 0; i < data.feeds.length; i++) {
+                        if (data.feeds[i].field2) {
+                            dataSweater.push(data.feeds[i].field2)
+                        }
+                    }
+
+                    var ySweater = new Array();
+                    var xSweater = new Array();
+
+                    for (var i = 0; i < dataSweater.length; i++) {
+                        var dataParse = JSON.parse(dataSweater[i])
+                        ySweater.push(parseInt(dataParse.val));
+                        xSweater.push(dataParse.day);
+                    }
+
+                    new Chart("chartSweaterNhap", {
+                        type: "bar",
+                        data: {
+                            labels: xSweater,
+                            datasets: [{
+                                fill: false,
+                                backgroundColor: "#B22222",
+                                label: "Biểu đồ số lượng áo SWEATER đã nhập",
+                                data: ySweater
+                            }, ]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    display: true,
+                                    ticks: {
+                                        beginAtZero: true,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+                } else {}
+            }
+            requestNhap.send()
+
+
+            var requestXuat = new XMLHttpRequest()
+            var urlXuat = "https://api.thingspeak.com/channels/1977080/fields/5.json?api_key=75JQCE82LDZPGTO4"
+
+            requestXuat.open('GET', urlXuat, true)
+            requestXuat.onload = function() {
+                if (requestXuat.status == 200) {
+                    var data = JSON.parse(requestXuat.responseText);
+
+                    dataSweater = new Array();
+                    for (i = 0; i < data.feeds.length; i++) {
+                        if (data.feeds[i].field5) {
+                            dataSweater.push(data.feeds[i].field5)
+                        }
+                    }
+
+                    var ySweater = new Array();
+                    var xSweater = new Array();
+
+                    for (var i = 0; i < dataSweater.length; i++) {
+                        var dataParse = JSON.parse(dataSweater[i])
+                        ySweater.push(parseInt(dataParse.val));
+                        xSweater.push(dataParse.day);
+                    }
+
+                    new Chart("chartSweaterXuat", {
+                        type: "bar",
+                        data: {
+                            labels: xSweater,
+                            datasets: [{
+                                fill: false,
+                                backgroundColor: "#B22222",
+                                label: "Biểu đồ số lượng áo SWEATER đã xuất",
+                                data: ySweater
+                            }, ]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    display: true,
+                                    ticks: {
+                                        beginAtZero: true,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+                } else {}
+            }
+            requestXuat.send()
+        }
+
+        function thongKeJacket() {
+            var requestNhap = new XMLHttpRequest()
+            var urlNhap = "https://api.thingspeak.com/channels/1977080/fields/3.json?api_key=75JQCE82LDZPGTO4"
+            requestNhap.open('GET', urlNhap, true)
+            requestNhap.onload = function() {
+                if (requestNhap.status == 200) {
+                    var data = JSON.parse(requestNhap.responseText);
+
+                    dataJacket = new Array();
+
+                    for (i = 0; i < data.feeds.length; i++) {
+                        if (data.feeds[i].field3) {
+                            dataJacket.push(data.feeds[i].field3)
+                        }
+                    }
+
+                    var yJacket = new Array();
+                    var xJacket = new Array();
+
+                    for (var i = 0; i < dataJacket.length; i++) {
+                        var dataParse = JSON.parse(dataJacket[i])
+                        yJacket.push(parseInt(dataParse.val));
+                        xJacket.push(dataParse.day);
+                    }
+
+
+                    new Chart("chartJackeNhap", {
+                        type: "bar",
+                        data: {
+                            labels: xJacket,
+                            datasets: [{
+                                fill: false,
+                                backgroundColor: "#006400",
+                                label: "Biểu đồ số lượng áo JACKET đã nhập",
+                                data: yJacket
+                            }, ]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    display: true,
+                                    ticks: {
+                                        beginAtZero: true,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+                } else {}
+            }
+            requestNhap.send()
+
+
+            var requestXuat = new XMLHttpRequest()
+            var urlXuat = "https://api.thingspeak.com/channels/1977080/fields/6.json?api_key=75JQCE82LDZPGTO4"
+            requestXuat.open('GET', urlXuat, true)
+            requestXuat.onload = function() {
+                if (requestXuat.status == 200) {
+                    var data = JSON.parse(requestXuat.responseText);
+
+                    dataJacket = new Array();
+
+                    for (i = 0; i < data.feeds.length; i++) {
+                        if (data.feeds[i].field6) {
+                            dataJacket.push(data.feeds[i].field6)
+                        }
+                    }
+
+                    var yJacket = new Array();
+                    var xJacket = new Array();
+
+                    for (var i = 0; i < dataJacket.length; i++) {
+                        var dataParse = JSON.parse(dataJacket[i])
+                        yJacket.push(parseInt(dataParse.val));
+                        xJacket.push(dataParse.day);
+                    }
+
+
+                    new Chart("chartJackeXuat", {
+                        type: "bar",
+                        data: {
+                            labels: xJacket,
+                            datasets: [{
+                                fill: false,
+                                backgroundColor: "#006400",
+                                label: "Biểu đồ số lượng áo JACKET đã xuất",
+                                data: yJacket
+                            }, ]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    display: true,
+                                    ticks: {
+                                        beginAtZero: true,
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+                } else {}
+            }
+            requestXuat.send()
+
+        }
+
+    </script>
+
+
+    <div class="content">
+
+
+        <form name="form2">
+            <!-- <input type="button" value="Chạy số liệu"
+                onclick="thongKeTP(), thongKeHoodie(),thongKeSweater(),thongKeJacket();"> -->
+            <input type="button" value="Chạy số liệu" onclick="thongKeHoodie(); thongKeSweater(); thongKeJacket()">
+        </form>
+
+
+        <p id="thongke"></p>
+
+
+
+
+        <h2 style="text-align: center">
+            <i class="fa fa-fw fa-caret-down"></i><b>Biểu đồ thống kê áo HOODIE:</b>
+        </h2>
+        <table>
+            <tr>
+                <td class="img-td" colspan="2">
+                    <img src="img/a3.jpg" width="600" height="350" alt="">
+                </td>
+            </tr>
+            <tr class="chartWrapper">
+                <td><canvas id="chartHoodieNhap" style="width:40vw; max-width: 1000px;"></canvas></td>
+                <td><canvas id="chartHoodieXuat" style="width:40vw;max-width:1000px;"></canvas></td>
+
+            </tr>
+        </table>
+
+
+
+
+        <h2 style="text-align: center;">
+            <i class="fa fa-fw fa-caret-down"></i><b>Biểu đồ thống kê áo SWEATER:</b>
+        </h2>
+        <table>
+            <tr>
+                <td class="img-td" colspan="2">
+                    <img src="img/sweater1.jpg" width="600" height="350" alt="">
+                </td>
+            </tr>
+            <tr class="chartWrapper">
+                <td><canvas id="chartSweaterNhap" style="width:40vw;max-width:1000px;"></canvas></td>
+                <td><canvas id="chartSweaterXuat" style="width:40vw;max-width:1000px;"></canvas></td>
+        </table>
+
+
+
+
+        <h2 style="text-align: center">
+            <i class="fa fa-fw fa-caret-down"></i><b>Biểu đồ thống kê áo JACKET:</b>
+        </h2>
+        <table>
+            <tr>
+                <td class="img-td" colspan="2">
+                    <img src="img/jacket2.jpg" width="600" height="350" alt="">
+                </td>
+            </tr>
+            <tr class="chartWrapper">
+                <td><canvas id="chartJackeNhap" style="width:40vw;max-width:1000px;"></canvas></td>
+                <td><canvas id="chartJackeXuat" style="width:40vw;max-width:1000px;"></canvas></td>
+            </tr>
+        </table>
+
+
+    </div>
+</body>
+
+</html>
